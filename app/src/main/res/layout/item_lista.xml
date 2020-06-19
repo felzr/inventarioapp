@@ -12,6 +12,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
+        android:id="@+id/texto_lista_inventario"
         android:layout_margin="10dp"
         android:text="teste"
         android:layout_width="match_parent"
@@ -19,20 +20,19 @@
     </TextView>
 </LinearLayout>
     <LinearLayout
-        android:layout_margin="10dp"
         android:layout_weight="1.5"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <Button
-            android:padding="5dp"
+            android:gravity="center"
             android:background="@android:color/transparent"
             android:drawableTint="@color/colorAccent"
             android:drawableTop="@drawable/launch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></Button>
         <Button
-            android:padding="5dp"
+            android:gravity="center"
             android:background="@android:color/transparent"
             android:drawableTint="@color/colorAccent"
             android:drawableTop="@drawable/delete"

@@ -8,7 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btnNovoInventario, btnInventarios, btnRelatorio;
+    private Button btnNovoInventario, btnInventarios,
+            btnRelatorio, btnMiniNovoInventario,btnMiniInventarios, btnMiniRelatorio;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
                 novoInventario();
             }
         });
+        btnMiniInventarios = findViewById(R.id.btn_mini_inventario);
+//        btnMiniInventarios.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                chamaInventarios();
+//            }
+//        });
     }
 
     private void novoInventario() {

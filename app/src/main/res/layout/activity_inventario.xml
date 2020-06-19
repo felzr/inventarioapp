@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lista_inventario"
             android:orientation="vertical"
             tools:listitem="@layout/item_lista"
             android:layout_width="match_parent"
