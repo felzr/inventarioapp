@@ -41,6 +41,7 @@
             android:layout_height="wrap_content">
         </EditText>
         <Button
+            android:id="@+id/btn_logar"
             android:layout_margin="10dp"
             android:textColor="@android:color/white"
             android:background="@color/colorPrimaryDark"
@@ -61,6 +62,7 @@
             android:layout_height="wrap_content">
         </androidx.appcompat.widget.AppCompatTextView>
         <Button
+            android:id="@+id/btn_registrar"
             android:layout_margin="10dp"
             android:textColor="@android:color/white"
             android:background="@color/colorPrimaryDark"
