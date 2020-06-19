@@ -38,9 +38,11 @@
             android:layout_margin="10dp"
             android:background="@drawable/edit_text_style"
             android:layout_width="match_parent"
+            android:inputType="textPassword"
             android:layout_height="wrap_content">
         </EditText>
         <Button
+
             android:layout_margin="10dp"
             android:textColor="@android:color/white"
             android:background="@color/colorPrimaryDark"

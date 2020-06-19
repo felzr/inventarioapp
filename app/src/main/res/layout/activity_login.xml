@@ -33,6 +33,7 @@
             android:layout_height="wrap_content">
         </EditText>
         <EditText
+            android:inputType="textPassword"
             android:padding="15dp"
             android:hint="@string/senha"
             android:layout_margin="10dp"
