@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Iventario</string>
+    <string name="home">Home</string>
+    <string name="novo_invent_rio">Novo Inventário</string>
+    <string name="invent_rios">Inventários</string>
+    <string name="relat_rios">Relatórios</string>
+    <string name="login">Login</string>
+    <string name="nome_do_usu_rio">Nome do usuário</string>
+    <string name="entrar">Entrar</string>
+    <string name="registrar">Registrar</string>
+    <string name="ainda_n_o_cadastrado_registre_se">Ainda não é cadastrado? Registre-se</string>
+    <string name="registrar">Registrar</string>
+    <string name="senha">Senha</string>
+    <string name="novo_invent_rio">Novo Inventário</string>
+    <string name="nome_do_invent_rio">Nome do Inventário</string>
+    <string name="descricao_do_invent_rio">Descricao do Inventário</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="novo_item">Novo Item</string>
+    <string name="nome_do_produto">Nome do produto</string>
+    <string name="quantidade_do_produto">quantidade do produto</string>
+    <string name="categoria_produto">Categoria Produto</string>
+    <string name="descricao_do_produto">Descricao do produto</string>
+    <string name="foto_do_produto">Foto do produto</string>
+</resources>

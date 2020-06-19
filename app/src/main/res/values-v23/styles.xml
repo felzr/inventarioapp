@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="customBigButton" parent="TextAppearance.AppCompat">
+        android:drawableTint="@color/colorAccent"
+        android:drawableLeft="@drawable/add_circle"
+        android:textSize="20sp"
+        android:padding="50dp"
+        android:layout_margin="20dp"
+
+        <item name="android:drawableTint">10dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>
