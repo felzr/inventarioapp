@@ -7,11 +7,9 @@
     <string name="login">Login</string>
     <string name="nome_do_usu_rio">Nome do usuário</string>
     <string name="entrar">Entrar</string>
-    <string name="registrar">Registrar</string>
     <string name="ainda_n_o_cadastrado_registre_se">Ainda não é cadastrado? Registre-se</string>
     <string name="registrar">Registrar</string>
     <string name="senha">Senha</string>
-    <string name="novo_invent_rio">Novo Inventário</string>
     <string name="nome_do_invent_rio">Nome do Inventário</string>
     <string name="descricao_do_invent_rio">Descricao do Inventário</string>
     <string name="cadastrar">Cadastrar</string>
