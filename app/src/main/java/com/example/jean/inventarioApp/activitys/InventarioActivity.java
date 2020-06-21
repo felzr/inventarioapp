@@ -1,4 +1,4 @@
-package com.example.jean.inventarioApp;
+package com.example.jean.inventarioApp.activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.jean.inventarioApp.R;
 import com.example.jean.inventarioApp.adapters.InventarioAdapter;
 import com.example.jean.inventarioApp.model.Inventario;
 

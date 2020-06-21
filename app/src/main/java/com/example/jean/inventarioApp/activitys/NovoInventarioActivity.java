@@ -1,8 +1,10 @@
-package com.example.jean.inventarioApp;
+package com.example.jean.inventarioApp.activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.jean.inventarioApp.R;
 
 public class NovoInventarioActivity extends AppCompatActivity {
 
