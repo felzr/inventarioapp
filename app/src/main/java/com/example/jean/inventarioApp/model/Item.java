@@ -2,11 +2,12 @@ package com.example.jean.inventarioApp.model;
 
 import java.util.Date;
 
-public class Inventario {
+public class Item {
     private String id;
     private String nome;
     private Date data;
     private String descricao;
+    private String urlFoto;
 
     public String getId() {
         return id;
@@ -38,6 +39,14 @@ public class Inventario {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getUrlFoto() {
+        return urlFoto;
+    }
+
+    public void setUrlFoto(String urlFoto) {
+        this.urlFoto = urlFoto;
     }
 
 }
