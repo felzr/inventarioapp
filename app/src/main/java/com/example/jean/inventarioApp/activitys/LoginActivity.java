@@ -10,11 +10,12 @@ import android.widget.Button;
 import com.example.jean.inventarioApp.R;
 
 public class LoginActivity extends AppCompatActivity {
-    private Button btnLogar, btnRegsitar;
+    private Button btnLogar, btnRegistra;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         btnLogar = findViewById(R.id.btn_logar);
         btnLogar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -22,8 +23,8 @@ public class LoginActivity extends AppCompatActivity {
                 logar();
             }
         });
-        btnRegsitar = findViewById(R.id.btn_registrar);
-        btnRegsitar.setOnClickListener(new View.OnClickListener() {
+        btnRegistra = findViewById(R.id.btn_registrar);
+        btnRegistra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registrar();

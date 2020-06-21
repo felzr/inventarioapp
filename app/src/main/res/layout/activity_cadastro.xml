@@ -25,6 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <EditText
+            android:id="@+id/campo_nome"
+            android:inputType="textPersonName"
             android:padding="15dp"
             android:hint="@string/nome_do_usu_rio"
             android:layout_margin="10dp"
@@ -33,6 +35,17 @@
             android:layout_height="wrap_content">
         </EditText>
         <EditText
+            android:id="@+id/campo_email"
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:hint="@string/e_mail_do_usu_rio"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </EditText>
+        <EditText
+            android:id="@+id/campo_senha"
             android:padding="15dp"
             android:hint="@string/senha"
             android:layout_margin="10dp"
@@ -42,7 +55,7 @@
             android:layout_height="wrap_content">
         </EditText>
         <Button
-
+            android:id="@+id/btn_registrar"
             android:layout_margin="10dp"
             android:textColor="@android:color/white"
             android:background="@color/colorPrimaryDark"

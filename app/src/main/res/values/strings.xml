@@ -19,4 +19,5 @@
     <string name="categoria_produto">Categoria Produto</string>
     <string name="descricao_do_produto">Descricao do produto</string>
     <string name="foto_do_produto">Foto do produto</string>
+    <string name="e_mail_do_usu_rio">E-mail do usuário</string>
 </resources>

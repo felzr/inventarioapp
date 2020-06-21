@@ -3,8 +3,8 @@ package com.example.jean.inventarioApp.model;
 public class Usuario {
     private String id;
     private String email;
-    private String nome;
     private String senha;
+    private String nome;
 
     public String getId() {
         return id;
@@ -22,14 +22,6 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getSenha() {
         return senha;
     }
@@ -38,4 +30,11 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }
