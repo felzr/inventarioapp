@@ -25,14 +25,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <EditText
+            android:id="@+id/campo_email"
             android:padding="15dp"
-            android:hint="@string/nome_do_usu_rio"
+            android:hint="@string/e_mail_do_usu_rio"
             android:layout_margin="10dp"
             android:background="@drawable/edit_text_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </EditText>
         <EditText
+            android:id="@+id/campo_senha"
             android:inputType="textPassword"
             android:padding="15dp"
             android:hint="@string/senha"
