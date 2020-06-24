@@ -112,7 +112,7 @@ public class CadastroActivity extends AppCompatActivity {
     }
     private void carregaUsuarioLogado(Usuario usuario) {
         Preferences preferencias = new Preferences(CadastroActivity.this);
-        preferencias.salvarDados( usuario.getId(), usuario.getNome() );
+        preferencias.salvarDados( usuario.getId(), usuario.getEmail() );
         Intent intent = new Intent(CadastroActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.jean.inventarioApp.R;
 import com.example.jean.inventarioApp.model.Usuario;
 import com.example.jean.inventarioApp.services.Firebase;
+import com.example.jean.inventarioApp.services.Preferences;
 import com.example.jean.inventarioApp.utils.Base64Custom;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,12 +27,14 @@ public class LoginActivity extends AppCompatActivity {
     private EditText campoEmail, campoSenha;
     private Usuario usuario;
     private FirebaseAuth autenticacao;
+    private Preferences preferences;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        preferences = new Preferences(getApplicationContext());
         campoEmail = (EditText) findViewById(R.id.campo_email);
         campoSenha = (EditText) findViewById(R.id.campo_senha);
         verificaLoginAnterior();
@@ -60,6 +63,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+                    if (preferences.getIdentificador() == null){
+                        String id = Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail().toString());
+                        preferences.salvarDados(id,campoEmail.getText().toString());
+                    }
                     abrirMain();
                     Toast.makeText(LoginActivity.this, "Sucesso ao fazer login!", Toast.LENGTH_LONG ).show();
                 }else{

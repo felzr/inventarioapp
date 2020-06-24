@@ -20,10 +20,10 @@ public class Preferences {
 
     }
 
-    public void salvarDados(String identificadorUsuario, String nomeUsuario) {
+    public void salvarDados(String identificadorUsuario, String email) {
 
         editor.putString(CHAVE_IDENTIFICADOR, identificadorUsuario);
-        editor.putString(CHAVE_NOME, nomeUsuario);
+        editor.putString(CHAVE_NOME, email);
         editor.commit();
 
     }
