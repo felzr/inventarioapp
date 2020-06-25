@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <EditText
+            android:id="@+id/nome_inventario"
             android:padding="15dp"
             android:hint="@string/nome_do_invent_rio"
             android:layout_margin="10dp"
@@ -33,6 +34,7 @@
             android:layout_height="wrap_content">
         </EditText>
         <EditText
+            android:id="@+id/descr_inventario"
             android:layout_gravity="top"
             android:lines="10"
             android:padding="15dp"
@@ -43,6 +45,7 @@
             android:layout_height="wrap_content">
         </EditText>
         <Button
+            android:id="@+id/btn_cadastrar_inventario"
             android:layout_margin="10dp"
             android:textColor="@android:color/white"
             android:background="@color/colorPrimaryDark"

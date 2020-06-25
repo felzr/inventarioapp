@@ -3,6 +3,7 @@ package com.example.jean.inventarioApp.model;
 import java.util.Date;
 
 public class Item {
+    private String identificadorInventario;
     private String id;
     private String nome;
     private Date data;

@@ -3,10 +3,12 @@ package com.example.jean.inventarioApp.model;
 import java.util.Date;
 
 public class Inventario {
+    private String identificadorUsuarioResponsavel;
     private String id;
     private String nome;
     private Date data;
     private String descricao;
+
 
     public String getId() {
         return id;
@@ -40,4 +42,11 @@ public class Inventario {
         this.descricao = descricao;
     }
 
+    public String getIdentificadorUsuarioResponsavel() {
+        return identificadorUsuarioResponsavel;
+    }
+
+    public void setIdentificadorUsuarioResponsavel(String identificadorUsuarioResponsavel) {
+        this.identificadorUsuarioResponsavel = identificadorUsuarioResponsavel;
+    }
 }
