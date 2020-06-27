@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import android.os.Bundle;
 import android.util.Log;
 
@@ -20,6 +21,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.EventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,7 @@ public class InventarioActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private FirebaseFirestore db;
     private Preferences preferences;
+    private EventListener valueEventListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class InventarioActivity extends AppCompatActivity {
                         Inventario inventario = new Inventario();
                         inventario = document.toObject(Inventario.class);
                         myDataset.add(inventario);
+                        mAdapter.notifyDataSetChanged();
                     }
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());

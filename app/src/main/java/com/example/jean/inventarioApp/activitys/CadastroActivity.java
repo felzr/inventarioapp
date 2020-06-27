@@ -74,41 +74,42 @@ public class CadastroActivity extends AppCompatActivity {
 
     private void cadastrarUsuario(Usuario usuario) {
         auth = Firebase.getFirebaseAutenticacao();
-        if (usuario.getNome().equals("")) {
-            Toast.makeText(CadastroActivity.this, "Erro ao cadastrar usuário: " + "O nome do usuário é obrigatório", Toast.LENGTH_LONG).show();
-        }
-        auth.createUserWithEmailAndPassword(usuario.getEmail(), usuario.getSenha()).addOnCompleteListener(CadastroActivity.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        if (usuario.getNome().equals("")&& this.usuario.getEmail().equals("") && this.usuario.getSenha().equals("")) {
+            Toast.makeText(CadastroActivity.this, "Erro ao cadastrar usuário: " + "O nome, e-mail e senha do usuário são obrigatórios", Toast.LENGTH_LONG).show();
+        }else {
 
-                if (task.isSuccessful()) {
+            auth.createUserWithEmailAndPassword(usuario.getEmail(), usuario.getSenha()).addOnCompleteListener(CadastroActivity.this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                    Toast.makeText(CadastroActivity.this, "Sucesso ao cadastrar usuário", Toast.LENGTH_LONG).show();
+                    if (task.isSuccessful()) {
 
-                    String identificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
-                    usuario.setId(identificadorUsuario);
-                    salvar(usuario);
-                } else {
+                        Toast.makeText(CadastroActivity.this, "Sucesso ao cadastrar usuário", Toast.LENGTH_LONG).show();
 
-                    String erro = "";
-                    try {
-                        throw task.getException();
-                    } catch (FirebaseAuthWeakPasswordException e) {
-                        erro = "Escolha uma senha que contenha, letras e números.";
-                    } catch (FirebaseAuthInvalidCredentialsException e) {
-                        erro = "Email indicado não é válido.";
-                    } catch (FirebaseAuthUserCollisionException e) {
-                        erro = "Já existe uma conta com esse e-mail.";
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                        String identificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
+                        usuario.setId(identificadorUsuario);
+                        salvar(usuario);
+                    } else {
+
+                        String erro = "";
+                        try {
+                            throw task.getException();
+                        } catch (FirebaseAuthWeakPasswordException e) {
+                            erro = "Escolha uma senha que contenha, letras e números.";
+                        } catch (FirebaseAuthInvalidCredentialsException e) {
+                            erro = "Email indicado não é válido.";
+                        } catch (FirebaseAuthUserCollisionException e) {
+                            erro = "Já existe uma conta com esse e-mail.";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(CadastroActivity.this, "Erro ao cadastrar usuário: " + erro, Toast.LENGTH_LONG).show();
                     }
-                    Toast.makeText(CadastroActivity.this, "Erro ao cadastrar usuário: " + erro, Toast.LENGTH_LONG).show();
+
                 }
+            });
 
-            }
-        });
-
-
+        }
     }
     private void carregaUsuarioLogado(Usuario usuario) {
         Preferences preferencias = new Preferences(CadastroActivity.this);

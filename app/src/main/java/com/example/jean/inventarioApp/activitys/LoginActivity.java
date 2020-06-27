@@ -59,21 +59,26 @@ public class LoginActivity extends AppCompatActivity {
         this.usuario.setEmail(campoEmail.getText().toString());
         this.usuario.setSenha(campoSenha.getText().toString());
         autenticacao = Firebase.getFirebaseAutenticacao();
-        autenticacao.signInWithEmailAndPassword(this.usuario.getEmail(), this.usuario.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    if (preferences.getIdentificador() == null){
-                        String id = Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail().toString());
-                        preferences.salvarDados(id,campoEmail.getText().toString());
+        if (this.usuario.getEmail().equals("") && this.usuario.getSenha().equals("")){
+            Toast.makeText(LoginActivity.this, "E-mail e senha são obrigatórios", Toast.LENGTH_LONG ).show();
+        }else{
+            autenticacao.signInWithEmailAndPassword(this.usuario.getEmail(), this.usuario.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()){
+                        if (preferences.getIdentificador() == null){
+                            String id = Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail().toString());
+                            preferences.salvarDados(id,campoEmail.getText().toString());
+                        }
+                        abrirMain();
+                        Toast.makeText(LoginActivity.this, "Sucesso ao fazer login!", Toast.LENGTH_LONG ).show();
+                    }else{
+                        Toast.makeText(LoginActivity.this, "Erro ao fazer login!", Toast.LENGTH_LONG ).show();
                     }
-                    abrirMain();
-                    Toast.makeText(LoginActivity.this, "Sucesso ao fazer login!", Toast.LENGTH_LONG ).show();
-                }else{
-                    Toast.makeText(LoginActivity.this, "Erro ao fazer login!", Toast.LENGTH_LONG ).show();
                 }
-            }
-        });
+            });
+
+        }
     }
 
     private void verificaLoginAnterior() {
