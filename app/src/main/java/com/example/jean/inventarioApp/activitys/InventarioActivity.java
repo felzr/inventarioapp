@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.jean.inventarioApp.R;
 import com.example.jean.inventarioApp.adapters.InventarioAdapter;
@@ -34,6 +36,7 @@ public class InventarioActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private Preferences preferences;
     private EventListener valueEventListener;
+    private TextView textoInventarioVazio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +45,12 @@ public class InventarioActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.lista_inventario);
         preferences = new Preferences(getApplicationContext());
         recyclerView.setHasFixedSize(true);
+        textoInventarioVazio = findViewById(R.id.texto_sem_registros);
 
         // use a linear layout manager
         List<Inventario> myDataset = new ArrayList<>();
         db = Firebase.getFirebaseDatabase();
-
+        mAdapter = new InventarioAdapter((ArrayList) myDataset, getApplicationContext());
         Task<QuerySnapshot> docRef = db.collection("Inventarios").whereEqualTo("identificadorUsuarioResponsavel",
                 preferences.getIdentificador()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -55,8 +59,14 @@ public class InventarioActivity extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Inventario inventario = new Inventario();
                         inventario = document.toObject(Inventario.class);
+                        inventario.setId(document.getId());
                         myDataset.add(inventario);
-                        mAdapter.notifyDataSetChanged();
+                        if (myDataset.size() != 0) {
+                            mAdapter.notifyDataSetChanged();
+                        } else {
+                            textoInventarioVazio.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.INVISIBLE);
+                        }
                     }
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
@@ -66,9 +76,8 @@ public class InventarioActivity extends AppCompatActivity {
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        // specify an adapter (see also next example)
-        mAdapter = new InventarioAdapter((ArrayList) myDataset, getApplicationContext());
         recyclerView.setAdapter(mAdapter);
+
     }
 
     private List<Inventario> carregaListaInventario(String identificador) {

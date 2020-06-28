@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jean.inventarioApp.activitys.ItensActivity;
 import com.example.jean.inventarioApp.activitys.NovoItemActivity;
 import com.example.jean.inventarioApp.R;
 import com.example.jean.inventarioApp.model.Inventario;
@@ -16,11 +17,11 @@ import com.example.jean.inventarioApp.model.Inventario;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventarioAdapter extends RecyclerView.Adapter<InventarioHolder>  {
+public class InventarioAdapter extends RecyclerView.Adapter<InventarioHolder> {
     private List<Inventario> inventarios;
     private Context context;
 
-    public InventarioAdapter(ArrayList inventarios,Context context) {
+    public InventarioAdapter(ArrayList inventarios, Context context) {
         this.inventarios = inventarios;
         this.context = context;
     }
@@ -38,7 +39,8 @@ public class InventarioAdapter extends RecyclerView.Adapter<InventarioHolder>  {
         holder.nome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), NovoItemActivity.class);
+                Intent intent = new Intent(view.getContext(), ItensActivity.class);
+                intent.putExtra("idInventario", inventarios.get(position).getId());
                 view.getContext().startActivity(intent);
             }
         });

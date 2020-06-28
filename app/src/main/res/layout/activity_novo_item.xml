@@ -18,66 +18,109 @@
             android:layout_height="wrap_content">
         </androidx.appcompat.widget.AppCompatTextView>
     </LinearLayout>
-    <LinearLayout
+    <ScrollView
         android:layout_weight="1"
-        android:layout_margin="10dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <EditText
-            android:padding="15dp"
-            android:hint="@string/nome_do_produto"
+        <LinearLayout
             android:layout_margin="10dp"
-            android:background="@drawable/edit_text_style"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </EditText>
-        <EditText
-            android:padding="15dp"
-            android:hint="@string/quantidade_do_produto"
-            android:layout_margin="10dp"
-            android:background="@drawable/edit_text_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></EditText>
+            android:layout_height="match_parent">
+            <EditText
+                android:padding="15dp"
+                android:hint="@string/nome_do_produto"
+                android:layout_margin="10dp"
+                android:background="@drawable/edit_text_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+            <EditText
+                android:padding="15dp"
+                android:hint="@string/quantidade_do_produto"
+                android:layout_margin="10dp"
+                android:background="@drawable/edit_text_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></EditText>
 
-        <EditText
-            android:padding="15dp"
-            android:hint="@string/categoria_produto"
-            android:layout_margin="10dp"
-            android:background="@drawable/edit_text_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </EditText>
-        <EditText
-            android:layout_gravity="top"
-            android:lines="5"
-            android:padding="15dp"
-            android:hint="@string/descricao_do_produto"
-            android:layout_margin="10dp"
-            android:background="@drawable/edit_text_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </EditText>
-        <Button
-            android:padding="5dp"
-            android:layout_margin="10dp"
-            android:background="@color/colorPrimary"
-            android:drawableTint="@color/colorAccent"
-            android:drawableTop="@drawable/galery"
-            android:text="@string/foto_do_produto"
-            android:textSize="15sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </Button>
-        <Button
-            android:layout_margin="10dp"
-            android:textColor="@android:color/white"
-            android:background="@color/colorPrimaryDark"
-            android:text="@string/cadastrar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </Button>
-    </LinearLayout>
+            <EditText
+                android:padding="15dp"
+                android:hint="@string/categoria_produto"
+                android:layout_margin="10dp"
+                android:background="@drawable/edit_text_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+            <EditText
+                android:layout_gravity="top"
+                android:lines="5"
+                android:padding="15dp"
+                android:hint="@string/descricao_do_produto"
+                android:layout_margin="10dp"
+                android:background="@drawable/edit_text_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+            <Button
+                android:id="@+id/btn_abrir_opcao_foto"
+                android:padding="5dp"
+                android:layout_margin="10dp"
+                android:background="@color/colorPrimary"
+                android:drawableTint="@color/colorAccent"
+                android:drawableTop="@drawable/galery"
+                android:text="@string/foto_do_produto"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </Button>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/view_image"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/view_upload_foto"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btn_camera"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:textColor="@android:color/white"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="@string/abrir_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></Button>
+                <Button
+                    android:id="@+id/btn_galeria"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:textColor="@android:color/white"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="@string/abrir_galeria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></Button>
+
+            </LinearLayout>
+            <Button
+                android:layout_margin="10dp"
+                android:textColor="@android:color/white"
+                android:background="@color/colorPrimaryDark"
+                android:text="@string/cadastrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </Button>
+        </LinearLayout>
+    </ScrollView>
+
     <LinearLayout
         android:gravity="center"
         android:background="@color/colorPrimary"

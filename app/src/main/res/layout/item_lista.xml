@@ -1,43 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:background="@color/colorPrimary"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-<LinearLayout
-    android:layout_weight="1"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/texto_lista_inventario"
-        android:layout_margin="10dp"
-        android:text="teste"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </TextView>
-</LinearLayout>
+    android:gravity="center"
+    android:orientation="horizontal">
+
     <LinearLayout
-        android:layout_weight="1.5"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <Button
-            android:gravity="center"
-            android:background="@android:color/transparent"
-            android:drawableTint="@color/colorAccent"
-            android:drawableTop="@drawable/launch"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/texto_lista_inventario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:gravity="center|left"
+            android:text="teste"
+            android:textSize="16sp"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_edit"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></Button>
-        <Button
-            android:gravity="center"
-            android:background="@android:color/transparent"
-            android:drawableTint="@color/colorAccent"
-            android:drawableTop="@drawable/delete"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:src="@drawable/launch"
+            android:tint="@color/colorAccent"></androidx.appcompat.widget.AppCompatImageButton>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_delete"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></Button>
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:src="@drawable/delete"
+            android:tint="@color/colorAccent"></androidx.appcompat.widget.AppCompatImageButton>
     </LinearLayout>
 
 

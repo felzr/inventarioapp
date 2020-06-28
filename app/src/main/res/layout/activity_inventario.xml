@@ -23,6 +23,14 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/texto_sem_registros"
+           android:visibility="gone"
+            android:gravity="center"
+            style="@style/customTextActionBar"
+            android:text="Não existe inventários cadastradados"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></androidx.appcompat.widget.AppCompatTextView>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lista_inventario"
             android:orientation="vertical"
