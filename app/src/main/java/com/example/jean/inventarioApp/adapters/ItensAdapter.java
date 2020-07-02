@@ -14,7 +14,7 @@ import com.example.jean.inventarioApp.model.Item;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItensAdapter extends RecyclerView.Adapter<ItensHolder>{
+public class ItensAdapter extends RecyclerView.Adapter<ItensHolder> {
 
     private List<Item> itens;
     private Context context;
@@ -39,7 +39,7 @@ public class ItensAdapter extends RecyclerView.Adapter<ItensHolder>{
         holder.btbDeletar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onClickItem(itens.get(position).getId());
+                mListener.deleteClickItem(itens.get(position).getId());
             }
         });
 //        holder.nome.setOnClickListener(new View.OnClickListener() {

@@ -58,7 +58,7 @@ public class ItensActivity extends AppCompatActivity {
         db = Firebase.getFirebaseDatabase();
         mAdapter = new ItensAdapter((ArrayList) myDataset, getApplicationContext(), new ItemViewClickListener() {
             @Override
-            public void onClickItem(String id) {
+            public void deleteClickItem(String id) {
                 db.collection("itens").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -72,6 +72,12 @@ public class ItensActivity extends AppCompatActivity {
                     }
                 });
             }
+
+            @Override
+            public void editClickItem(String id) {
+
+            }
+
         });
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

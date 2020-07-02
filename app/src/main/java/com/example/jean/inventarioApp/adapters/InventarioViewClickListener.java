@@ -1,8 +1,6 @@
 package com.example.jean.inventarioApp.adapters;
 
-import android.view.View;
-
-public interface ItemViewClickListener {
+public interface InventarioViewClickListener {
     void deleteClickItem(String id);
 
     void editClickItem(String id);

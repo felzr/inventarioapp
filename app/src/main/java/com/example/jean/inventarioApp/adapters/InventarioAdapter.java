@@ -21,10 +21,12 @@ import java.util.List;
 public class InventarioAdapter extends RecyclerView.Adapter<InventarioHolder> {
     private List<Inventario> inventarios;
     private Context context;
+    private InventarioViewClickListener listener;
 
-    public InventarioAdapter(ArrayList inventarios, Context context) {
+    public InventarioAdapter(ArrayList inventarios, Context context, InventarioViewClickListener listener) {
         this.inventarios = inventarios;
         this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
@@ -44,6 +46,12 @@ public class InventarioAdapter extends RecyclerView.Adapter<InventarioHolder> {
                 intent.putExtra("idInventario", inventarios.get(position).getId());
                 System.out.println(inventarios.get(0).toString());
                 view.getContext().startActivity(intent);
+            }
+        });
+        holder.btbDeletar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.deleteClickItem(inventarios.get(position).getId());
             }
         });
 
