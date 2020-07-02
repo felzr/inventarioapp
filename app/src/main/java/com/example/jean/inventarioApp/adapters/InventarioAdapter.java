@@ -44,7 +44,7 @@ public class InventarioAdapter extends RecyclerView.Adapter<InventarioHolder> {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ItensActivity.class);
                 intent.putExtra("idInventario", inventarios.get(position).getId());
-                System.out.println(inventarios.get(0).toString());
+                System.out.println(inventarios.get(position).toString());
                 view.getContext().startActivity(intent);
             }
         });

@@ -21,10 +21,12 @@ import com.example.jean.inventarioApp.services.Firebase;
 import com.example.jean.inventarioApp.services.Preferences;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -42,6 +44,7 @@ public class InventarioActivity extends AppCompatActivity {
     private EventListener valueEventListener;
     private TextView textoInventarioVazio;
     private List<Inventario> myDataset = new ArrayList<>();
+    List<Item> listaItensFilhosRetorno = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +59,7 @@ public class InventarioActivity extends AppCompatActivity {
         mAdapter = new InventarioAdapter((ArrayList) myDataset, getApplicationContext(), new InventarioViewClickListener() {
             @Override
             public void deleteClickItem(String id) {
-                Integer quantiadeRegistros = 0;
-
-                if (quantiadeRegistros == 0) {
-                    System.out.println("aqui");
-                    //deletaInventario(id);
-                } else {
-                    Toast.makeText(InventarioActivity.this, "Para deletar o Inventártio deve-se deletar os iten contidos nele!", Toast.LENGTH_LONG).show();
-                }
+                verificarPossiveldeletarInventario(id);
 
             }
 
@@ -81,7 +77,46 @@ public class InventarioActivity extends AppCompatActivity {
 
     }
 
-    private void deletaInventario(String id) {
+    private void verificarPossiveldeletarInventario(String id) {
+        db.collection("itens")
+                .whereEqualTo("identificadorInventario", id)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Item item = new Item();
+                                item = document.toObject(Item.class);
+                                item.setId(document.getId());
+                                listaItensFilhosRetorno.add(item);
+                            }
+                            if (listaItensFilhosRetorno.size() == 0) {
+                                deletarInventario(id);
+                            } else {
+                                Toast.makeText(InventarioActivity.this, "Antes de deletar esse inventario, deve-se deletar os itens contidos nele! ", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void deletarInventario(String id) {
+        db.collection("Inventarios").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                myDataset.clear();
+                atualizarListaInventario();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(InventarioActivity.this, "Erro ao deletar Inventário", Toast.LENGTH_LONG).show();
+            }
+        });
+
 
     }
 
