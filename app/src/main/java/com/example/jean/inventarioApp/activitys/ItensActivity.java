@@ -75,6 +75,11 @@ public class ItensActivity extends AppCompatActivity {
 
             @Override
             public void editClickItem(String id) {
+                Intent i = new Intent(ItensActivity.this, NovoItemActivity.class);
+                i.putExtra("modoEditar", true);
+                i.putExtra("indentificadorIemEdicao", id);
+                startActivity(i);
+                finish();
 
             }
 

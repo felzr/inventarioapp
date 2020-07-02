@@ -56,12 +56,6 @@ public class NovoInventarioActivity extends AppCompatActivity {
             }
         });
         btnEditar = findViewById(R.id.btn_editar_inventario);
-        btnEditar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
         validaCadastroOuEdicao();
     }
 

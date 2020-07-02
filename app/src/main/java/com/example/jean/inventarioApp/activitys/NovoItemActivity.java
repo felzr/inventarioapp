@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.jean.inventarioApp.R;
+import com.example.jean.inventarioApp.model.Inventario;
 import com.example.jean.inventarioApp.model.Item;
 import com.example.jean.inventarioApp.services.Firebase;
 import com.example.jean.inventarioApp.utils.Permissao;
@@ -30,6 +31,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -49,26 +51,20 @@ public class NovoItemActivity extends AppCompatActivity {
     private FirebaseStorage galeriaFirebase;
     private Item item;
     private EditText campoNomeProduto, campoQtdProduto, campoCategoria, campodescrProduto;
-    private Button cadastrarItem, udploadFoto, camera, abrirGaleira;
+    private Button cadastrarItem, udploadFoto, camera, abrirGaleira, btnEditar;
     private View viewUpdaload;
     private final int PICK_IMAGE_REQUEST = 22;
     private final int REQUEST_IMAGE_CAPTURE = 111;
     private ImageView imageItem;
     private Uri filePath;
     private Bitmap fotoItem;
+    private Boolean modoEditar;
+    private String indentificadorIemEdicao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_novo_item);
-        int PERMISSION_ALL = 1;
-        String[] PERMISSIONS = {
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                android.Manifest.permission.CAMERA
-        };
-        Permissao.validaPermissoes(PERMISSION_ALL, NovoItemActivity.this, PERMISSIONS);
-        this.identificadorInventario = getChaveInventario();
         udploadFoto = findViewById(R.id.btn_abrir_opcao_foto);
         imageItem = findViewById(R.id.view_image);
         udploadFoto.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +91,7 @@ public class NovoItemActivity extends AppCompatActivity {
         campoNomeProduto = findViewById(R.id.campo_nome_produto);
         campoQtdProduto = findViewById(R.id.campo_quantidade);
         campoCategoria = findViewById(R.id.campo_categoria);
-        campodescrProduto = findViewById(R.id.campo_categoria);
+        campodescrProduto = findViewById(R.id.campo_descr);
         cadastrarItem = findViewById(R.id.btn_cadastrar);
         cadastrarItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +102,78 @@ public class NovoItemActivity extends AppCompatActivity {
                 } else {
                     cadastrarFoto();
                 }
+            }
+        });
+        btnEditar = findViewById(R.id.btn_edit);
+        btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        validaCadastroOuEdicao();
+        this.identificadorInventario = getChaveInventario();
+    }
+
+    private void validaCadastroOuEdicao() {
+        this.modoEditar = getIntent().getBooleanExtra("modoEditar", false);
+        if (modoEditar) {
+            carregaViewEditar();
+        }
+    }
+
+    private void carregaViewEditar() {
+        db = Firebase.getFirebaseDatabase();
+        Item itemEditado = new Item();
+        this.cadastrarItem.setVisibility(View.INVISIBLE);
+        this.btnEditar.setVisibility(View.VISIBLE);
+        indentificadorIemEdicao = getIntent().getSerializableExtra("indentificadorIemEdicao").toString();
+        itemEditado.setId(indentificadorIemEdicao);
+        DocumentReference docRef = db.collection("itens").document(indentificadorIemEdicao);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Item itemSnapshot = documentSnapshot.toObject(Item.class);
+                campoNomeProduto.setText(itemSnapshot.getNome());
+                campoQtdProduto.setText(itemSnapshot.getQtd().toString());
+                campoCategoria.setText(itemSnapshot.getCategoria());
+                campodescrProduto.setText(itemSnapshot.getDescricao());
+                itemEditado.setIdentificadorInventario(itemSnapshot.getIdentificadorInventario());
+                itemEditado.setId(documentSnapshot.getId());
+                itemEditado.setData(itemSnapshot.getData());
+                itemEditado.setUrlFoto(itemSnapshot.getUrlFoto());
+            }
+        });
+        this.btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemEditado.setNome(campoNomeProduto.getText().toString());
+                itemEditado.setQtd(Integer.parseInt(campoQtdProduto.getText().toString()));
+                itemEditado.setCategoria(campoCategoria.getText().toString());
+                itemEditado.setDescricao(campodescrProduto.getText().toString());
+                Map<String, Object> item = new HashMap<>();
+                item.put("identificadorInventario", itemEditado.getIdentificadorInventario());
+                item.put("nome", itemEditado.getNome());
+                item.put("data", itemEditado.getData());
+                item.put("descricao", itemEditado.getDescricao());
+                item.put("qtd", itemEditado.getQtd());
+                item.put("categoria", itemEditado.getCategoria());
+                item.put("urlFoto", itemEditado.getUrlFoto());
+                db.collection("itens").document(itemEditado.getId()).set(item).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Intent i = new Intent(NovoItemActivity.this, ItensActivity.class);
+                        i.putExtra("idInventario", itemEditado.getIdentificadorInventario());
+                        startActivity(i);
+                        finish();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
             }
         });
     }
@@ -244,9 +312,14 @@ public class NovoItemActivity extends AppCompatActivity {
         }
 
     }
+
     private String getChaveInventario() {
         Intent i = getIntent();
-        return i.getSerializableExtra("idInventario").toString();
+        if (modoEditar) {
+            return "";
+        } else {
+            return i.getSerializableExtra("idInventario").toString();
+        }
     }
 
     @Override

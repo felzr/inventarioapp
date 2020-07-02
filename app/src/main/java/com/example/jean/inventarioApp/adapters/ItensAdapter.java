@@ -42,6 +42,12 @@ public class ItensAdapter extends RecyclerView.Adapter<ItensHolder> {
                 mListener.deleteClickItem(itens.get(position).getId());
             }
         });
+        holder.btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.editClickItem(itens.get(position).getId());
+            }
+        });
 //        holder.nome.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

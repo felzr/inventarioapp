@@ -91,6 +91,7 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/view_upload_foto"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -123,6 +124,16 @@
                 android:textColor="@android:color/white"
                 android:background="@color/colorPrimaryDark"
                 android:text="@string/cadastrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </Button>
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btn_edit"
+                android:layout_margin="10dp"
+                android:textColor="@android:color/white"
+                android:background="@color/colorPrimaryDark"
+                android:text="@string/editar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </Button>
