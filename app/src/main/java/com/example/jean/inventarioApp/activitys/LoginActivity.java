@@ -3,6 +3,7 @@ package com.example.jean.inventarioApp.activitys;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.example.jean.inventarioApp.model.Usuario;
 import com.example.jean.inventarioApp.services.Firebase;
 import com.example.jean.inventarioApp.services.Preferences;
 import com.example.jean.inventarioApp.utils.Base64Custom;
+import com.example.jean.inventarioApp.utils.Permissao;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -35,6 +37,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         preferences = new Preferences(getApplicationContext());
+        int PERMISSION_ALL = 1;
+        String[] PERMISSIONS = {
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.CAMERA
+        };
+        Permissao.validaPermissoes(PERMISSION_ALL, LoginActivity.this, PERMISSIONS);
         campoEmail = (EditText) findViewById(R.id.campo_email);
         campoSenha = (EditText) findViewById(R.id.campo_senha);
         verificaLoginAnterior();

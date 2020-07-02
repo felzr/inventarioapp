@@ -3,7 +3,6 @@
     <string name="home">Home</string>
     <string name="novo_invent_rio">Novo Inventário</string>
     <string name="invent_rios">Inventários</string>
-    <string name="relat_rios">Relatórios</string>
     <string name="login">Login</string>
     <string name="nome_do_usu_rio">Nome do usuário</string>
     <string name="entrar">Entrar</string>
@@ -26,4 +25,5 @@
     <string name="abrir_galeria">Abrir Galeria</string>
     <string name="abrir_camera">Abrir Camera</string>
     <string name="editar">Editar</string>
+    <string name="relat_rios">Relatórios</string>
 </resources>
