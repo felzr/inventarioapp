@@ -53,6 +53,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </Button>
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_editar_inventario"
+            android:layout_margin="10dp"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/editar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Button>
     </LinearLayout>
     <LinearLayout
         android:gravity="center"

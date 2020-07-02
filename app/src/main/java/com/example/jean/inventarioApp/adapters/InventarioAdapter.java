@@ -54,6 +54,12 @@ public class InventarioAdapter extends RecyclerView.Adapter<InventarioHolder> {
                 listener.deleteClickItem(inventarios.get(position).getId());
             }
         });
+        holder.btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.editClickItem(inventarios.get(position).getId());
+            }
+        });
 
     }
 

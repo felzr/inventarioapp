@@ -18,6 +18,7 @@ import com.example.jean.inventarioApp.services.Preferences;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
@@ -29,9 +30,11 @@ public class NovoInventarioActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private Preferences preferences;
     private EditText nomeInventario, descrInventario;
-    private Button btnCadastro;
+    private Button btnCadastro, btnEditar;
     private Inventario inventario;
     private static final String TAG = "CadastroInventario";
+    private Boolean modoEditar;
+    private String indentificadorInventarioEdicao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +48,78 @@ public class NovoInventarioActivity extends AppCompatActivity {
         btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (nomeInventario.getText().toString().equals("") && nomeInventario.getText().toString().equals("")){
-                    Toast.makeText(NovoInventarioActivity.this, "Nome e descrição são obrigatórios!", Toast.LENGTH_LONG ).show();
-                }else{
+                if (nomeInventario.getText().toString().equals("") && nomeInventario.getText().toString().equals("")) {
+                    Toast.makeText(NovoInventarioActivity.this, "Nome e descrição são obrigatórios!", Toast.LENGTH_LONG).show();
+                } else {
                     cadastrarInventario();
                 }
+            }
+        });
+        btnEditar = findViewById(R.id.btn_editar_inventario);
+        btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        validaCadastroOuEdicao();
+    }
+
+    private void validaCadastroOuEdicao() {
+        this.modoEditar = getIntent().getBooleanExtra("modoEditar", false);
+        if (modoEditar) {
+            carregaViewEditar();
+        }
+
+    }
+
+    private void carregaViewEditar() {
+        Inventario referencia = new Inventario();
+        this.btnCadastro.setVisibility(View.INVISIBLE);
+        this.btnEditar.setVisibility(View.VISIBLE);
+        this.indentificadorInventarioEdicao = getIntent().getSerializableExtra("indentificadorInventarioEdicao").toString();
+        DocumentReference docRef = db.collection("Inventarios").document(indentificadorInventarioEdicao);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Inventario inventarioEditar = documentSnapshot.toObject(Inventario.class);
+                nomeInventario.setText(inventarioEditar.getNome());
+                descrInventario.setText(inventarioEditar.getDescricao());
+                referencia.setId(documentSnapshot.getId());
+                referencia.setIdentificadorUsuarioResponsavel(inventarioEditar.getIdentificadorUsuarioResponsavel());
+                referencia.setData(new Date());
+            }
+        });
+        this.btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                referencia.setNome(nomeInventario.getText().toString());
+                referencia.setDescricao(descrInventario.getText().toString());
+                Map<String, Object> inv = new HashMap<>();
+                inv.put("identificadorUsuarioResponsavel", referencia.getIdentificadorUsuarioResponsavel());
+                inv.put("nome", referencia.getNome());
+                inv.put("data", referencia.getData());
+                inv.put("descricao", referencia.getDescricao());
+                db.collection("Inventarios").document(referencia.getId()).set(inv).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Intent i = new Intent(NovoInventarioActivity.this, InventarioActivity.class);
+                        startActivity(i);
+                        finish();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
             }
         });
     }
 
     private void cadastrarInventario() {
-    this.inventario = montaInventario();
+        this.inventario = montaInventario();
         db = Firebase.getFirebaseDatabase();
         Map<String, Object> inv = new HashMap<>();
         inv.put("identificadorUsuarioResponsavel", this.inventario.getIdentificadorUsuarioResponsavel());
@@ -68,7 +132,7 @@ public class NovoInventarioActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        Toast.makeText(NovoInventarioActivity.this, "cadastro efetuado com sucesso!", Toast.LENGTH_LONG ).show();
+                        Toast.makeText(NovoInventarioActivity.this, "cadastro efetuado com sucesso!", Toast.LENGTH_LONG).show();
 
                         carregaInventariosCadastrados();
                     }
@@ -77,7 +141,7 @@ public class NovoInventarioActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error adding document", e);
-                        Toast.makeText(NovoInventarioActivity.this, "Erro ao cadastrar Inventário!", Toast.LENGTH_LONG ).show();
+                        Toast.makeText(NovoInventarioActivity.this, "Erro ao cadastrar Inventário!", Toast.LENGTH_LONG).show();
 
                     }
                 });

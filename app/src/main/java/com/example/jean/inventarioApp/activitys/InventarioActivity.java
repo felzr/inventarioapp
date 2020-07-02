@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -65,7 +66,11 @@ public class InventarioActivity extends AppCompatActivity {
 
             @Override
             public void editClickItem(String id) {
-
+                Intent i = new Intent(InventarioActivity.this, NovoInventarioActivity.class);
+                i.putExtra("modoEditar", true);
+                i.putExtra("indentificadorInventarioEdicao", id);
+                startActivity(i);
+                finish();
             }
         });
 

@@ -8,12 +8,5 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UsuarioControle {
-
-    public int salvar(Usuario usuario){
-        Map<String, Object> user = new HashMap<>();
-        user.put("email", usuario.getEmail());
-        user.put("usuario", usuario.getNome());
-        user.put("id", usuario.getId());
-        return 1;
-    }
+    public String codUsuarioLogado;
 }
