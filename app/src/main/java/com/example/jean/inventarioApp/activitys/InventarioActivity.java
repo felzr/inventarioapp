@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +59,7 @@ public class InventarioActivity extends AppCompatActivity {
     private TextView textoInventarioVazio;
     private List<Inventario> myDataset = new ArrayList<>();
     List<Item> listaItensFilhosRetorno = new ArrayList<>();
+    private Button btnHome, btnRelatorios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +69,20 @@ public class InventarioActivity extends AppCompatActivity {
         preferences = new Preferences(getApplicationContext());
         recyclerView.setHasFixedSize(true);
         textoInventarioVazio = findViewById(R.id.texto_sem_registros);
-
+        btnHome = findViewById(R.id.btn_home);
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chamaMain();
+            }
+        });
+        btnRelatorios = findViewById(R.id.btn_relatorios_i);
+        btnRelatorios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chamaRelatorio();
+            }
+        });
         db = Firebase.getFirebaseDatabase();
         mAdapter = new InventarioAdapter((ArrayList) myDataset, getApplicationContext(), new InventarioViewClickListener() {
             @Override
@@ -161,6 +176,17 @@ public class InventarioActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void chamaMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void chamaRelatorio() {
+        Intent intent = new Intent(this, RelatorioActivity.class);
+        startActivity(intent);
     }
 
 }

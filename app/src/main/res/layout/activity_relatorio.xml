@@ -43,4 +43,44 @@
             tools:listitem="@layout/relatorio_item"></androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_home"
+            android:layout_margin="10dp"
+            android:background="@android:color/transparent"
+            android:drawableTint="@color/colorAccent"
+            android:drawableTop="@drawable/add_circle"
+            android:text="@string/home"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Button>
+        <Button
+            android:id="@+id/btn_inventarios"
+            android:layout_margin="10dp"
+            android:background="@android:color/transparent"
+            android:drawableTint="@color/colorAccent"
+            android:drawableTop="@drawable/list"
+            android:text="@string/invent_rios"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </Button>
+        <Button
+            android:id="@+id/btndow_relatorios"
+            android:layout_margin="10dp"
+            android:background="@android:color/transparent"
+            android:drawableTint="@color/colorAccent"
+            android:drawableTop="@drawable/leaderboard"
+            android:text="@string/relat_rios"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </Button>
+    </LinearLayout>
 </LinearLayout>

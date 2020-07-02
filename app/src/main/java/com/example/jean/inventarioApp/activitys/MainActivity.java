@@ -59,19 +59,26 @@ public class MainActivity extends AppCompatActivity {
                 novoInventario();
             }
         });
-        btnMiniInventarios = findViewById(R.id.btn_mini_inventario);
-//        btnMiniInventarios.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                chamaInventarios();
-//            }
-//        });
         btnRelatorio = findViewById(R.id.btn_relatorios);
         btnRelatorio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, RelatorioActivity.class);
                 startActivity(i);
+            }
+        });
+        btnMiniInventarios = findViewById(R.id.btndow_inventarios);
+        btnMiniInventarios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chamaInventarios();
+            }
+        });
+        btnMiniRelatorio = findViewById(R.id.btndow_relatorios);
+        btnMiniRelatorio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chamaRelatorio();
             }
         });
     }
@@ -89,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void chamaInventarios() {
         Intent intent = new Intent(this, InventarioActivity.class);
+        startActivity(intent);
+    }
+
+    private void chamaRelatorio() {
+        Intent intent = new Intent(this, RelatorioActivity.class);
         startActivity(intent);
     }
 }

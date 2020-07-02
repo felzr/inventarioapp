@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class ItensActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private TextView textoInventarioVazio;
     private String TAG = "itens";
+    private ImageButton btnBack;
     private List<Item> myDataset = new ArrayList<>();
 
     @Override
@@ -47,6 +49,13 @@ public class ItensActivity extends AppCompatActivity {
         this.chaveIventario = getChaveInventario();
         recyclerView = (RecyclerView) findViewById(R.id.lista_itens);
         textoInventarioVazio = findViewById(R.id.texto_sem_registros);
+        btnBack = findViewById(R.id.btn_back);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         btnCadastrarItem = findViewById(R.id.btn_cadastrar_item);
         btnCadastrarItem.setOnClickListener(new View.OnClickListener() {
             @Override

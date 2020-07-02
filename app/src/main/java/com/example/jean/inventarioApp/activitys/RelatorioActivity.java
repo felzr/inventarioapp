@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +58,7 @@ public class RelatorioActivity extends AppCompatActivity {
     private EventListener valueEventListener;
     private TextView textoInventarioVazio;
     private List<Inventario> myDataset = new ArrayList<>();
+    private Button btnhome, btnInventarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,21 @@ public class RelatorioActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         textoInventarioVazio = findViewById(R.id.texto_sem_registros);
         db = Firebase.getFirebaseDatabase();
+        btnhome = findViewById(R.id.btn_home);
+        btnhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chamaMain();
+
+            }
+        });
+        btnInventarios = findViewById(R.id.btn_inventarios);
+        btnInventarios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chamaInventarios();
+            }
+        });
         mAdapter = new RelatorioAdapter((ArrayList) myDataset, getApplicationContext(), new RelatorioViewClickListener() {
             @Override
             public void clickItem(String id) {
@@ -189,6 +207,21 @@ public class RelatorioActivity extends AppCompatActivity {
 
     public static String format(Date data, String parent) {
         return new SimpleDateFormat(parent).format(data);
+    }
+
+    private void chamaMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void chamaInventarios() {
+        Intent intent = new Intent(this, InventarioActivity.class);
+        startActivity(intent);
+    }
+
+    private void chamaRelatorio() {
+        Intent intent = new Intent(this, RelatorioActivity.class);
+        startActivity(intent);
     }
 
 }

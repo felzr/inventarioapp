@@ -147,6 +147,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/btn_home"
             android:layout_margin="10dp"
             android:background="@android:color/transparent"
             android:drawableTint="@color/colorAccent"
@@ -156,6 +157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></Button>
         <Button
+            android:id="@+id/btn_inventarios"
             android:layout_margin="10dp"
             android:background="@android:color/transparent"
             android:drawableTint="@color/colorAccent"
@@ -167,6 +169,7 @@
 
         </Button>
         <Button
+            android:id="@+id/btn_relatorio"
             android:layout_margin="10dp"
             android:background="@android:color/transparent"
             android:drawableTint="@color/colorAccent"

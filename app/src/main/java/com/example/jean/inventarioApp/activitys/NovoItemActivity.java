@@ -60,6 +60,7 @@ public class NovoItemActivity extends AppCompatActivity {
     private Bitmap fotoItem;
     private Boolean modoEditar;
     private String indentificadorIemEdicao;
+    private Button btn_home, btn_inventarios, btn_relatorio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,28 @@ public class NovoItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_novo_item);
         udploadFoto = findViewById(R.id.btn_abrir_opcao_foto);
         imageItem = findViewById(R.id.view_image);
+        btn_home = findViewById(R.id.btn_home);
+        btn_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chamaMain();
+            }
+        });
+        btn_inventarios = findViewById(R.id.btn_inventarios);
+        btn_inventarios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chamaInventarios();
+            }
+        });
+        btn_relatorio = findViewById(R.id.btn_relatorio);
+        btn_relatorio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chamaRelatorio();
+            }
+        });
+
         udploadFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -324,6 +347,24 @@ public class NovoItemActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        finish();
+    }
+
+    private void chamaMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void chamaRelatorio() {
+        Intent intent = new Intent(this, RelatorioActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void chamaInventarios() {
+        Intent intent = new Intent(this, InventarioActivity.class);
+        startActivity(intent);
         finish();
     }
 }
