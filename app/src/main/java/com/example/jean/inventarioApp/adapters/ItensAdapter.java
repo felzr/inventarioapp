@@ -1,7 +1,6 @@
 package com.example.jean.inventarioApp.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jean.inventarioApp.R;
-import com.example.jean.inventarioApp.activitys.ItensActivity;
-import com.example.jean.inventarioApp.model.Inventario;
 import com.example.jean.inventarioApp.model.Item;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItensAdapter extends RecyclerView.Adapter<ItensHolder> {
+public class ItensAdapter extends RecyclerView.Adapter<ItensHolder>{
 
     private List<Item> itens;
     private Context context;
+    private ItemViewClickListener mListener;
 
-    public ItensAdapter(ArrayList itens, Context context) {
+    public ItensAdapter(ArrayList itens, Context context, ItemViewClickListener mListener) {
         this.itens = itens;
+        this.mListener = mListener;
         this.context = context;
     }
 
@@ -37,17 +36,24 @@ public class ItensAdapter extends RecyclerView.Adapter<ItensHolder> {
     @Override
     public void onBindViewHolder(@NonNull ItensHolder holder, int position) {
         holder.nome.setText(itens.get(position).getNome());
-        holder.nome.setOnClickListener(new View.OnClickListener() {
+        holder.btbDeletar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("deu certo");
+                mListener.onClickItem(itens.get(position).getId());
             }
         });
-
+//        holder.nome.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(view.getContext(), ItensActivity.class);
+//                view.getContext().startActivity(intent);
+//            }
+//        });
     }
 
     @Override
     public int getItemCount() {
         return itens.size();
     }
+
 }

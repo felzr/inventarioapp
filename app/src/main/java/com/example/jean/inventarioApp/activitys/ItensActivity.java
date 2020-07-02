@@ -11,14 +11,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jean.inventarioApp.R;
-import com.example.jean.inventarioApp.adapters.InventarioAdapter;
 import com.example.jean.inventarioApp.adapters.ItensAdapter;
-import com.example.jean.inventarioApp.model.Inventario;
+import com.example.jean.inventarioApp.adapters.ItemViewClickListener;
 import com.example.jean.inventarioApp.model.Item;
 import com.example.jean.inventarioApp.services.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -36,6 +38,7 @@ public class ItensActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private TextView textoInventarioVazio;
     private String TAG = "itens";
+    private List<Item> myDataset = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +54,33 @@ public class ItensActivity extends AppCompatActivity {
                 cadastrarItem(chaveIventario);
             }
         });
-        List<Item> myDataset = new ArrayList<>();
+
         db = Firebase.getFirebaseDatabase();
-        mAdapter = new ItensAdapter((ArrayList) myDataset, getApplicationContext());
+        mAdapter = new ItensAdapter((ArrayList) myDataset, getApplicationContext(), new ItemViewClickListener() {
+            @Override
+            public void onClickItem(String id) {
+                db.collection("itens").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        myDataset.clear();
+                        atualizaLista();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ItensActivity.this, "Erro ao deletarItem", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(mAdapter);
+        atualizaLista();
+
+    }
+
+    public void atualizaLista() {
         Task<QuerySnapshot> docRef = db.collection("itens").whereEqualTo("identificadorInventario",
                 this.chaveIventario).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -64,23 +91,17 @@ public class ItensActivity extends AppCompatActivity {
                         item = document.toObject(Item.class);
                         item.setId(document.getId());
                         myDataset.add(item);
-                        if (myDataset.size() != 0) {
-                            mAdapter.notifyDataSetChanged();
-                        } else {
-                            textoInventarioVazio.setVisibility(View.VISIBLE);
-                            recyclerView.setVisibility(View.INVISIBLE);
-                        }
+                        mAdapter.notifyDataSetChanged();
+                    }
+                    if (myDataset.size() == 0) {
+                        textoInventarioVazio.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.INVISIBLE);
                     }
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
                 }
             }
         });
-
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(mAdapter);
-
     }
 
     @Override
