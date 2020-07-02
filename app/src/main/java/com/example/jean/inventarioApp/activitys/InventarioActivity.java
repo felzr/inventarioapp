@@ -79,10 +79,4 @@ public class InventarioActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
 
     }
-
-    private List<Inventario> carregaListaInventario(String identificador) {
-        List<Inventario> listaInventarios = new ArrayList<>();
-
-        return listaInventarios;
-    }
 }

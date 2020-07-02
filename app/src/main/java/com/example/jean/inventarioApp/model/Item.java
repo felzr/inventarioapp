@@ -8,6 +8,8 @@ public class Item {
     private String nome;
     private Date data;
     private String descricao;
+    private Integer Qtd;
+    private String categoria;
     private String urlFoto;
 
     public String getId() {
@@ -50,4 +52,27 @@ public class Item {
         this.urlFoto = urlFoto;
     }
 
+    public String getIdentificadorInventario() {
+        return identificadorInventario;
+    }
+
+    public void setIdentificadorInventario(String identificadorInventario) {
+        this.identificadorInventario = identificadorInventario;
+    }
+
+    public Integer getQtd() {
+        return Qtd;
+    }
+
+    public void setQtd(Integer qtd) {
+        Qtd = qtd;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 }

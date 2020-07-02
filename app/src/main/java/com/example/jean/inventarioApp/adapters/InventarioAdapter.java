@@ -13,6 +13,7 @@ import com.example.jean.inventarioApp.activitys.ItensActivity;
 import com.example.jean.inventarioApp.activitys.NovoItemActivity;
 import com.example.jean.inventarioApp.R;
 import com.example.jean.inventarioApp.model.Inventario;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,7 @@ public class InventarioAdapter extends RecyclerView.Adapter<InventarioHolder> {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ItensActivity.class);
                 intent.putExtra("idInventario", inventarios.get(position).getId());
+                System.out.println(inventarios.get(0).toString());
                 view.getContext().startActivity(intent);
             }
         });

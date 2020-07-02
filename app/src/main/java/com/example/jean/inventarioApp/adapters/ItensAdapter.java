@@ -37,18 +37,17 @@ public class ItensAdapter extends RecyclerView.Adapter<ItensHolder> {
     @Override
     public void onBindViewHolder(@NonNull ItensHolder holder, int position) {
         holder.nome.setText(itens.get(position).getNome());
-//        holder.nome.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(view.getContext(), ItensActivity.class);
-//                view.getContext().startActivity(intent);
-//            }
-//        });
+        holder.nome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("deu certo");
+            }
+        });
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return itens.size();
     }
 }
